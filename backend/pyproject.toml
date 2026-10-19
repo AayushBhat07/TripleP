@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "proposalpanda"
+version = "0.2.0"
+description = "ProposalPanda API: tender analysis, bid drafting and the office database"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "httpx>=0.27",
+  "python-multipart>=0.0.9",
+  "pypdf>=5.0",
+  "regex>=2024.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.24"]
+
+[tool.setuptools.packages.find]
+include = ["proposalpanda*"]
+
+[tool.setuptools.package-data]
+proposalpanda = ["db/migrations/*.sql", "db/migrations/*.json"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
