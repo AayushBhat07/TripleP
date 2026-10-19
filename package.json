@@ -5,14 +5,14 @@
   "scripts": {
     "dev": "concurrently -k -n web,api -c cyan,magenta \"next dev\" \"npm run api\"",
     "dev:web": "next dev",
-    "api": "cd backend && python -m uvicorn proposalpanda.main:app --port 8000 --reload",
+    "api": "node scripts/py.mjs -m uvicorn proposalpanda.main:app --port 8000 --reload",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "test": "tsx --test tests/*.test.ts",
-    "test:api": "cd backend && python -m pytest -q",
-    "mock-ollama": "cd backend && python -m proposalpanda.scripts.mock_ollama",
-    "db:create-admin": "cd backend && python -m proposalpanda.scripts.create_admin"
+    "test:api": "node scripts/py.mjs -m pytest -q",
+    "mock-ollama": "node scripts/py.mjs -m proposalpanda.scripts.mock_ollama",
+    "db:create-admin": "node scripts/py.mjs -m proposalpanda.scripts.create_admin"
   },
   "dependencies": {
     "date-fns": "^4.1.0",

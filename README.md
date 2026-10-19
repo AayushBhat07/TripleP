@@ -21,7 +21,7 @@ npm run dev                      # both parts; open http://localhost:3000
 ```
 
 `npm run dev` starts the screens and the API together (`npm run dev:web` and `npm run api` start them one at a
-time). Keep the virtual environment active so `python` is the one with the backend installed.
+time). They use `python3`, or `python` where that is the only one (set `PYTHON` to pick another).
 
 Everything the office shares (tenders, bids, the company file, users, the sealed vault and the activity log) is
 in one SQLite file, `data/proposalpanda.db` (`DATABASE_PATH`, relative to this folder). The API creates and
