@@ -10,10 +10,8 @@ def write_pdf(path: Path, pages: list[list[str]]) -> Path:
     objects = ['<< /Type /Catalog /Pages 2 0 R >>', None, '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>']
     kids = []
     for lines in pages:
-        ops = ''.join(
-            f"BT /F1 11 Tf 50 {780 - i * 20} Td ({line.replace('\\', '\\\\').replace('(', '\\(').replace(')', '\\)')}) Tj ET\n"
-            for i, line in enumerate(lines)
-        )
+        escaped = [line.replace('\\', '\\\\').replace('(', '\\(').replace(')', '\\)') for line in lines]
+        ops = ''.join(f'BT /F1 11 Tf 50 {780 - i * 20} Td ({line}) Tj ET\n' for i, line in enumerate(escaped))
         objects.append(f'<< /Length {len(ops.encode("latin-1"))} >>\nstream\n{ops}endstream')
         objects.append(f'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents {len(objects)} 0 R >>')
         kids.append(f'{len(objects)} 0 R')

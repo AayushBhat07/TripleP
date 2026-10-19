@@ -69,9 +69,9 @@ def experience_line(profile: dict) -> str:
         parts.append(f"similar works completed: {'; '.join(w['name'] for w in works)}")
     staff = [s for s in profile.get('keyStaff') or [] if s.get('name')]
     if staff:
-        described = ', '.join(f"{s.get('qualification') or 'staff'}{f' ({js_number(s['years'])} yrs)' if s.get('years') else ''}" for s in staff)
+        described = ', '.join((s.get('qualification') or 'staff') + (f" ({js_number(s['years'])} yrs)" if s.get('years') else '') for s in staff)
         parts.append(f'key staff: {described}')
     machinery = (profile.get('machinery') or '').strip()
     if machinery:
-        parts.append(f"plant and machinery: {regex.sub(r'\s*\n\s*', '; ', machinery)}")
+        parts.append('plant and machinery: ' + regex.sub(r'\s*\n\s*', '; ', machinery))
     return '. '.join(parts)

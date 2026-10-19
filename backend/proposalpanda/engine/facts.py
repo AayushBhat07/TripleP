@@ -203,7 +203,10 @@ def find_delay_compensation(text: str) -> str | None:
         join_wrapped(text),
         I,
     )
-    return f"{regex.sub(r'\s', '', match[1])} per month, maximum {regex.sub(r'\s', '', match[2])}" if match else None
+    if not match:
+        return None
+    rate, cap = (regex.sub(r'\s', '', m) for m in (match[1], match[2]))
+    return f'{rate} per month, maximum {cap}'
 
 
 def _is_contents_row(s: str) -> bool:

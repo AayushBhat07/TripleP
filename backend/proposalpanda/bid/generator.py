@@ -239,7 +239,7 @@ def render_programme(draft: str, months: int | None, has_road: bool = False) -> 
     if has_road and not any(ROAD_WORK.search(a) for a in by_month.values()):
         for month in range(max(1, last - 2), last + 1):
             current = by_month.get(month)
-            prefix = f"{regex.sub(r'\.$', '', current)}; " if current else ''
+            prefix = regex.sub(r'\.$', '', current) + '; ' if current else ''
             by_month[month] = f'{prefix}approach road and drainage works (outside monsoon)'
     lines = [f"Month {i + 1}: {by_month.get(i + 1, '[activities to be planned]')}" for i in range(last)]
     return '\n'.join([*lines, '', 'The defect liability period runs from the date of completion and is not part of this programme.'])

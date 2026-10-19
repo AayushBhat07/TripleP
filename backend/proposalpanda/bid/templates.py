@@ -215,7 +215,7 @@ def _key_staff_and_plant(company: dict) -> list[str]:
         '**Key technical staff and plant**',
         '',
         *[f"- {s['name']}, {s.get('qualification') or '[qualification]'}{_years(s.get('years'))}" for s in staff],
-        *[f"- {regex.sub(r'^[-•]\s*', '', line.strip())}" for line in machinery.split('\n') if line.strip()],
+        *['- ' + regex.sub(r'^[-•]\s*', '', line.strip()) for line in machinery.split('\n') if line.strip()],
     ]
 
 

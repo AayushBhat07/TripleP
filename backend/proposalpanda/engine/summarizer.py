@@ -464,7 +464,7 @@ async def summarize_file(file_path: str, tender_id: str, tender_title: str, on_p
         'extract',
         STEP_LABELS['extract'],
         lambda: asyncio.to_thread(read),
-        lambda r: f"{format_in(len([w for w in regex.split(r'\s+', r['fullText']) if w]))} words read",
+        lambda r: format_in(len([w for w in regex.split(r'\s+', r['fullText']) if w])) + ' words read',
     )
     chapters = extracted['chapters']
     log.info('Extracted %d chapters from %s', len(chapters), tender_title)
